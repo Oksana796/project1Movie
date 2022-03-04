@@ -21,8 +21,14 @@
 
 Проверить, чтобы все работало без ошибок в консоли */
 
-'use strict';
+"use strict";
 
-let numberOfFilms = prompt("How many films did you watched already?", "");
+let numberOfFilms = +prompt("How many films did you watched already?", "");
 
-
+const personalMovieDB = {
+  count: numberOfFilms,
+  movies: {},
+  actors: {},
+  genres: [],
+  privat: false,
+};
