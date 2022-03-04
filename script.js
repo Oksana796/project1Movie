@@ -32,3 +32,13 @@ const personalMovieDB = {
   genres: [],
   privat: false,
 };
+
+let a = prompt("Your last watched film?");
+let b = prompt("Rate it");
+let c = prompt("Your last watched film?");
+let d = prompt("Rate it");
+
+personalMovieDB.movies[a] = b;
+personalMovieDB.movies[c] = d;
+
+console.log(personalMovieDB);
