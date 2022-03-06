@@ -1,29 +1,16 @@
-/* Задание на урок:
-
-1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
-'Сколько фильмов вы уже посмотрели?'
-
-2) Создать объект personalMovieDB и в него поместить такие свойства:
-    - count - сюда передается ответ на первый вопрос
-    - movies - в это свойство поместить пустой объект
-    - actors - тоже поместить пустой объект
-    - genres - сюда поместить пустой массив
-    - privat - в это свойство поместить boolean(логическое) значение false
-
-3) Задайте пользователю по два раза вопросы:
-    - 'Один из последних просмотренных фильмов?'
-    - 'На сколько оцените его?'
-Ответы стоит поместить в отдельные переменные
-Записать ответы в объект movies в формате: 
-    movies: {
-        'logan': '8.1'
-    }
-
-Проверить, чтобы все работало без ошибок в консоли */
-
 "use strict";
 
-let numberOfFilms = +prompt("How many films did you watched already?", "");
+let numberOfFilms;
+
+function start() {
+  numberOfFilms = +prompt("How many films did you watched already?", "");
+
+  while (numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms)) {
+    numberOfFilms = +prompt("How many films did you watched already?", "");
+  }
+}
+
+//start();
 
 const personalMovieDB = {
   count: numberOfFilms,
@@ -33,12 +20,49 @@ const personalMovieDB = {
   privat: false,
 };
 
-let a = prompt("Your last watched film?");
-let b = prompt("Rate it");
-let c = prompt("Your last watched film?");
-let d = prompt("Rate it");
+function writeYourGenres() {
+  for (let i = 1; i <= 3; i++) {
+    let genre = prompt(`Your prefered gender by number ${i}?`);
+    personalMovieDB.genres[i - 1] = genre;
+  }
+}
+writeYourGenres();
 
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
+function showMyDB(hidden) {
+  if (!hidden) {
+    console.log(personalMovieDB);
+  }
+}
+//showMyDB(personalMovieDB.privat);
+
+function rememberMyFilms() {
+  for (let i = 0; i < 2; i++) {
+    let a = prompt("Your last watched film?", "");
+    let b = prompt("Rate it", "");
+
+    if (a != null && b != null && a != "" && b != "" && a.length < 50) {
+      personalMovieDB.movies[a] = b;
+      console.log("done");
+    } else {
+      console.log("error");
+      i--;
+    }
+  }
+}
+
+//rememberMyFilms();
+
+function detectPersonalLevel() {
+  if (personalMovieDB.count < 10) {
+    console.log("few films");
+  } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+    console.log("classic");
+  } else if (personalMovieDB.count >= 30) {
+    console.log("wow.. cool");
+  } else {
+    console.log("error");
+  }
+}
+//detectPersonalLevel();
 
 console.log(personalMovieDB);
